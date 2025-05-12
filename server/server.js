@@ -8,7 +8,7 @@ const cors = require('cors'); // Usa require si no estás usando ES modules
 const app = express();
 
 // Configuración de CORS para permitir solicitudes desde tu frontend
-const allowedOrigins = ['http://localhost:5173'];
+const allowedOrigins = ['http://98.81.149.108:5173'];
 
 app.use(cors({ origin: allowedOrigins, credentials: true }));
 
