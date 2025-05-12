@@ -21,7 +21,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          # Usar Dockerfile ubicado en server/ y establecer server/ como contexto
+          # Construye la imagen desde el Dockerfile dentro de server/
           docker build -f server/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/server:latest server/
           docker push ${{ secrets.DOCKER_USERNAME }}/server:latest
 
@@ -44,14 +44,15 @@ jobs:
               sudo systemctl enable --now docker
             fi
 
-            # ✅ Descargar las últimas imágenes
+            # ✅ Descargar la última versión de la imagen
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/server:latest
 
-            # Verificar si las imágenes fueron descargadas correctamente
-            sudo docker images
-
-            # Detener y eliminar los contenedores existentes por nombre
-            sudo docker stop cliente || true
-            sudo docker rm cliente || true
+            # ✅ Detener y eliminar contenedores antiguos si existen
             sudo docker stop server || true
             sudo docker rm server || true
+
+            # ✅ Ejecutar el contenedor correctamente con mapeo de puerto 4800
+            sudo docker run -d \
+              --name server \
+              -p 4800:4800 \
+              ${{ secrets.DOCKER_USERNAME }}/server:latest
