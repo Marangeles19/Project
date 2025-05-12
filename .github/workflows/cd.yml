@@ -73,10 +73,10 @@ jobs:
               sudo systemctl enable --now docker
             fi
 
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/cliente:latest
-            sudo docker stop cliente || true
-            sudo docker rm cliente || true
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/client:latest
+            sudo docker stop client || true
+            sudo docker rm client || true
             sudo docker run -d \
-              --name cliente \
+              --name client \
               -p 80:80 \
-              ${{ secrets.DOCKER_USERNAME }}/cliente:latest
+              ${{ secrets.DOCKER_USERNAME }}/client:latest

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:4800'; // Ajusta según tu backend
+const API_URL = 'http://98.84.205.127:4800'; // Ajusta según tu backend
 
 const ListTasks = () => {
   const [tasks, setTasks] = useState([]);
